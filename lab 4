@@ -1,0 +1,94 @@
+#include <iostream>
+#include "math.h"
+#include"iomanip"
+#define n 5
+
+using namespace std;
+
+
+
+class Array{
+private:
+    double A[n][n];
+public:
+    void InputArray();
+    void OutputArray();
+    void Sort();
+    void AverageArihmetic();
+    void AdditionOfAvAr(double *);
+};
+void Array::InputArray(){
+    for (int i = 0; i <n; i++){
+        for (int j = 0; j < n; j++){
+            cout << "[" << i+1 << "][" << j+1 << "]=";
+            cin >> A[i][j];
+        }
+    }
+}
+void Array::OutputArray(){
+    for (int i = 0; i < n; i++){
+        for (int j = 0; j < n; j++)
+            cout << setw(1) << A[i][j] << "" <<" \t"
+            ;
+        cout << endl;
+    }
+    Sort();
+}
+void Array::Sort(){
+    int a=5;
+    int b=5;
+    int value, memory;
+    for (int k = 0; k < a; k++)
+        for (int i = 1; i < b; i++){
+            value = A[k][i]; memory = i;
+            for (int j = 0; j < i; j++)
+                if (value > A[k][j]){
+                    memory = j; break;
+                }
+            for (int j = i; j >= memory + 1; j--)
+                A[k][j] = A[k][j - 1];
+            A[k][memory] = value;
+        }
+ }
+
+
+void Array::AverageArihmetic(){
+    double sum[n];
+    int i, j;
+    for (i = 0; i < n; i++)
+        sum[i] = 0;
+    cout << endl;
+    for (int i = 0; i < n; i++){
+        for (int j = 0; j < (n - i); j++){
+            sum[j] = sum[j] + A[i][j];
+        }
+    }
+    for (int i = 0; i < n; i++)
+    {
+        cout << "Sum of column " << i + 1 << " = ";
+        cout << sum[i] << endl;
+    }
+    AdditionOfAvAr(sum);
+}
+
+void Array::AdditionOfAvAr(double*ptr){
+    double Addition = 1;
+    for (int i = 0; i < n - 1; i++){
+        Addition = Addition*ptr[i];
+    }
+    cout << "Addition of avarage geometric = " << Addition << endl;
+}
+int main(void){
+    Array  A;
+    cout << "Input elements of Array A" << endl;
+    A.InputArray();
+    cout << "\nnewInput Array A" << endl;
+    A.OutputArray();
+    A.Sort();
+    cout << "\nnewSorted Array A" << endl;
+    A.OutputArray();
+    cout << "\nAverageGeometric = "<<endl;
+    A.AverageArihmetic();
+    getchar;
+    system("pause");
+}
